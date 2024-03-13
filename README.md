@@ -1,6 +1,33 @@
 # flexynesis_manuscript
 All publication material relevant for the manuscript describing the flexynesis software package  
 
+# Environment
+
+## Install flexynesis 
+
+```
+git clone https://github.com/BIMSBbioinfo/flexynesis.git
+cd flexynesis
+# create conda env
+conda create -n flexynesis --file spec-file.txt
+conda activate flexynesis
+# install flexynesis
+pip install -e .
+```
+
+## Install other packages 
+
+```
+guix package --manifest=guix.scm --profile=./manuscript
+```
+
+## Activate environment
+
+```
+source ./manuscript/etc/profile
+conda activate flexynesis
+```
+
 
 # Manuscript
 
