@@ -34,6 +34,9 @@
     (specification->package "r-ggpubr")
     (specification->package "r-pheatmap")
     (specification->package "r-pharmacogx")
+    (specification->package "r-umap")
+    (specification->package "r-rtsne")
+    (specification->package "r-survminer")
     ;; Additional packages as needed
     ))
 
