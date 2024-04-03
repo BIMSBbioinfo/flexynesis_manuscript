@@ -173,16 +173,16 @@ split_dat <- function(dat, samples = NULL, ratio = 0.7) {
   test <- setdiff(samples, train)
   dat.train <- sapply(simplify = F, names(dat), function(x) {
     if(x == 'clin') {
-      dat[[x]][train,]
+      dat[[x]][train,,drop=F]
     } else {
-      dat[[x]][,train]
+      dat[[x]][,train,drop=F]
     }
   })
   dat.test <- sapply(simplify = F, names(dat), function(x) {
     if(x == 'clin') {
-      dat[[x]][test,]
+      dat[[x]][test,,drop=F]
     } else {
-      dat[[x]][,test]
+      dat[[x]][,test,drop=F]
     }
   })
   return(list('train' = dat.train, 'test' = dat.test))
