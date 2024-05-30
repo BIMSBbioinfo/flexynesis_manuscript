@@ -96,11 +96,40 @@ clin$risk_groups <- dt_surv[match(rownames(clin), sample_id)]$risk_groups
 df <- plot_tsne(E, returnData = T)
 df <- merge(df, clin, by = 'row.names')
 
-ggplot(df[!is.na(df$AGE),], aes(x = tSNE1, y = tSNE2)) +
+p1 <- ggplot(df[!is.na(df$AGE),], aes(x = tSNE1, y = tSNE2)) +
   geom_point(aes(color = HISTOLOGICAL_DIAGNOSIS, size = AGE ), alpha = 0.4) +
   scale_color_brewer(type = 'qual', palette = 6) + facet_grid( ~ risk_groups) + 
-  theme(legend.direction = 'vertical')
+  theme(legend.direction = 'vertical', text = element_text(size = 18)) 
 
 message(date(), "=> Finished making the plots")
+
+# top markers per outcome variable 
+top_markers <- lapply(split(dat$Imp, dat$Imp$target_variable), function(x) { 
+  unique(x[,.SD[which.max(importance)],by = c('layer', 'name')][order(importance, decreasing = T)])[1:10]
+  })
+
+p2 <- cowplot::plot_grid(plotlist = lapply(names(top_markers), function(x) {
+  dt <- top_markers[[x]]
+  ggplot(dt, aes(x = reorder(name, -importance), y = importance)) + 
+    geom_bar(aes(fill = importance), stat = 'identity') + 
+    scale_fill_gradient(low = 'gray', high = 'red') + 
+    labs(x = 'gene', title = x) + 
+    theme(text = element_text(size = 18), legend.position = 'none', 
+          axis.text.x = element_text(angle = 45, hjust = 1))
+}), nrow = 3)
+
+p <- cowplot::plot_grid(p1, p2, labels = 'AUTO')
+
+# Combine all 
+ggsave(filename = 'lgg_gbm_multitask_plot.pdf', plot = p, width = 210, height = 297, units = 'mm')
+ggsave(filename = 'lgg_gbm_multitask_plot.jpg', plot = p, width = 210, height = 210, units = 'mm', dpi = 300, bg = 'white')
+
+
+
+
+
+
+
+
 
 
