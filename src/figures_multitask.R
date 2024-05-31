@@ -121,8 +121,8 @@ p2 <- cowplot::plot_grid(plotlist = lapply(names(top_markers), function(x) {
 p <- cowplot::plot_grid(p1, p2, labels = 'AUTO')
 
 # Combine all 
-ggsave(filename = 'lgg_gbm_multitask_plot.pdf', plot = p, width = 210, height = 297, units = 'mm')
-ggsave(filename = 'lgg_gbm_multitask_plot.jpg', plot = p, width = 210, height = 210, units = 'mm', dpi = 300, bg = 'white')
+ggsave(filename = 'lgg_gbm_multitask_plot.pdf', plot = p, width = 10, height = 8)
+ggsave(filename = 'lgg_gbm_multitask_plot.jpg', plot = p, width = 10, height = 9, dpi = 300, bg = 'white')
 
 
 
