@@ -204,3 +204,58 @@ print_dataset <- function(dat, outdir) {
     })
   })
 }
+
+
+# plot bi-partite visualisation of labels (useful for comparing how different cluster memberships look)
+plot_cluster_comparison <- function(df1, df2) {
+  df1 <- data.frame(df1, check.names = F)
+  df2 <- data.frame(df2, check.names = F)
+  if(sum(is.na(df1[,1])) > 0) {
+    warning("Converting NA values to 'Undefined'")
+    df1[is.na(df1[,1]),1] <- 'Undefined'
+  }
+  if(sum(is.na(df2[,1])) > 0) {
+    warning("Converting NA values to 'Undefined'")
+    df2[is.na(df2[,1]),1] <- 'Undefined'
+  }
+  df1[,1] <- as.factor(df1[,1])
+  df2[,1] <- as.factor(df2[,1])
+
+  dt <- data.table(merge(df1[,1,drop=F], df2[,1,drop = F], by = 'row.names'))
+  labels <- colnames(dt[,2:3])
+  colnames(dt) <- c('rn', 'g1', 'g2')
+  dt1 <- dt[order(g1), c('rn', 'g1')]
+  dt2 <- dt[order(g2), c('rn', 'g2')]
+  dt1$r1 <- 1:nrow(dt1)
+  dt2$r2 <- 1:nrow(dt2)
+  dt <- merge(dt1, dt2, by = 'rn')[order(rn)]
+  ami <- aricode::AMI(dt$g1, dt$g2)
+  label_pos_left <- -0.05
+  label_pos_right <- 1.05
+  # plot segments
+  ggplot(dt[order(g1)]) +
+    geom_point(aes(x = 0, y = r1, color = g1))  +
+    geom_point(aes(x = 1, y = r2, color = g2)) +
+    geom_segment(aes(x = 0, xend = 1, y = r1, yend = r2, color = g1), alpha = 0.25) +
+    geom_label(data = dt[,median(r1), by = g1], aes(x = label_pos_left, y = V1, label = g1, color = g1), hjust = 1) +
+    geom_segment(data = dt[,list('max' = max(r1), 'min' = min(r1), 'median' = median(r1)), by = g1],
+                 aes(x = label_pos_left, y = median, xend = 0, yend = max, color = g1)) +
+    geom_segment(data = dt[,list('max' = max(r1), 'min' = min(r1), 'median' = median(r1)), by = g1],
+                 aes(x = label_pos_left, y = median, xend = 0, yend = min, color = g1)) +
+    geom_label(data = dt[,median(r2), by = g2], aes(x = label_pos_right, y = V1, label = g2, color = g2), hjust = 0) +
+    geom_segment(data = dt[,list('max' = max(r2), 'min' = min(r2), 'median' = median(r2)), by = g2],
+                 aes(x = label_pos_right, y = median, xend = 1, yend = max, color = g2)) +
+    geom_segment(data = dt[,list('max' = max(r2), 'min' = min(r2), 'median' = median(r2)), by = g2],
+                 aes(x = label_pos_right, y = median, xend = 1, yend = min, color = g2)) +
+    annotate('label', x = 0, y = max(dt$r1)+1, label = labels[1], vjust = 0) +
+    annotate('label', x = 1, y = max(dt$r2)+1, label = labels[2], vjust = 0) +
+    ggtitle(label = paste0(labels, collapse = " <-> "),
+            subtitle = paste0("Adjusted Mutual Information: ",round(ami,2))) +
+    theme_minimal() +
+    theme(axis.text = element_blank(), axis.title = element_blank(), panel.grid = element_blank(),
+          legend.position = 'none',
+          plot.margin = unit(c(0.1, 1.2, 0, 1.2), units = 'in'),
+          plot.title = element_text(hjust = 0.5),
+          plot.subtitle = element_text(hjust = 0.5)) +
+    coord_cartesian(clip = 'off')
+}
