@@ -52,9 +52,9 @@ dt2$method <- 'supervised_vae'
 dt2$finetuning <- 'with_finetuning' 
 dt <- rbind(dt1, dt2)
 
-p2 <- ggplot(dt[metric == 'f1_score'], aes(x = method, y = value)) + 
+p2 <- ggplot(dt[metric != 'kappa'], aes(x = method, y = value)) + 
   geom_bar(stat = 'identity', aes(fill = finetuning), position = 'dodge') + 
-  labs(y = 'F1 Score (mync amplification status)') + 
+  facet_grid(~ metric) + 
   scale_fill_brewer(type = 'qual', palette = 6) +
   theme(text = element_text(size = 16), legend.position = 'none') + coord_flip()
 
