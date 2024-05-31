@@ -6,7 +6,6 @@ library(ggrepel)
 ggplot2::theme_set(ggpubr::theme_pubclean())
 
 source('/fast/AG_Akalin/buyar/flexynesis_manuscript_work/flexynesis_manuscript/src/utils.R')
-
 folder <- '/fast/AG_Akalin/buyar/flexynesis_manuscript_work/analyses/unsupervised_cancertype/'
 
 get_plot <- function(df_tsne, factors, label_size = 5) {
@@ -40,6 +39,8 @@ p3
 p <- cowplot::plot_grid(cowplot::plot_grid(p1, p2, ncol = 1, labels = c('A', 'B')), 
                    p3, nrow = 1, rel_widths = c(1.5, 1), labels = c('A', 'C'))
 
+ggsave(filename = 'tcga_cancertype_clustering.pdf', 
+       plot = p, width = 10, height = 8)
 
 
 
