@@ -49,7 +49,7 @@ imp[grep('ENSG', name)]$genename <- ens2hgnc[match(imp[grep('ENSG', name)]$name,
 civic <- data.table::fread('/fast/AG_Akalin/buyar/flexynesis_manuscript_work/analyses/marker_analysis/01-Jan-2023-ClinicalEvidenceSummaries.tsv')
 
 p1 <- ggplot(best, aes(x = reorder(var, value), y = value)) + 
-  geom_bar(stat = 'identity', position = 'dodge', fill = 'lightblue') +
+  geom_bar(stat = 'identity', position = 'dodge', fill = 'red', alpha = 0.5) +
   geom_text(aes(label = paste(data_types, tool)), y = 0.01, hjust = 0, size = 4) + 
   theme(axis.title.y = element_blank()) + 
   labs(y = 'Best Pearson Correlation') + coord_flip()
