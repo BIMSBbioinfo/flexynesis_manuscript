@@ -1,8 +1,13 @@
 # prepare data for unsupervised clustering experiment for tcga 
-library(pbapply)
-source('./src/utils.R')
 
-dataDir <- '/data/local/buyar/arcas/pancancer_multiomics_manuscript/tcga/data/GDCdata'
+args = commandArgs(trailingOnly = T)
+
+library(pbapply)
+
+utils_script <- args[1]
+dataDir <- args[2]
+
+source(utils_script)
 
 projects <- unlist(strsplit('TCGA-BLCA,TCGA-BRCA,TCGA-CESC,TCGA-COAD,TCGA-ESCA,TCGA-HNSC,TCGA-KIRC,TCGA-KIRP,TCGA-LGG,TCGA-LIHC,TCGA-LUAD,TCGA-LUSC,TCGA-PAAD,TCGA-PCPG,TCGA-PRAD,TCGA-SARC,TCGA-STAD,TCGA-TGCT,TCGA-THCA,TCGA-UCEC', 
                      ','))
