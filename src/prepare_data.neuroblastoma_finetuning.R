@@ -6,12 +6,12 @@
 # mapping cell lines to known neuroblastoma subtypes 
 # use both control and confounding variables 
 
-#args <- commandArgs(trailingOnly = TRUE)
+args <- commandArgs(trailingOnly = TRUE)
 
 # path to script that contains "CBioPortalData" class.
-cbio_download_script = '/fast/AG_Akalin/buyar/flexynesis_manuscript_work/flexynesis_manuscript/src/get_cbioportal_data.R' #args[1]  #get_cbioportal_data.R
-depmap_data_folder = '/data/local/buyar/arcas/collaborations/neuroblastoma/data/depmap' 
-utils_script <- '/fast/AG_Akalin/buyar/flexynesis_manuscript_work/flexynesis_manuscript/src/utils.R'
+cbio_download_script = args[1] 
+depmap_data_folder = args[2] 
+utils_script <- args[3] 
 source(utils_script)
 source(cbio_download_script)
 
