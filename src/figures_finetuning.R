@@ -1,7 +1,9 @@
 # make figures about the fine-tuning section
 
+args <- commandArgs(trailingOnly = T)
+
 utils_script <- args[1]
-workdir <- args[2]
+projDir <- args[2]
 
 source(utils_script)
 
@@ -12,6 +14,7 @@ library(data.table)
 library(pheatmap)
 ggplot2::theme_set(ggpubr::theme_pubclean())
 
+workdir <- file.path(projDir, "finetuning_drug_response", "output")
 files <- dir(workdir, "stats.csv$", recursive = T)
 stats <- do.call(rbind, pbapply::pblapply(files[!grepl('baseline', files)], function(x) {
   dt <- data.table::fread(file.path(workdir, x))
@@ -36,18 +39,19 @@ p1 <- ggplot(stats[metric == 'pearson_corr'][tool == 'supervised_vae'],
   scale_fill_brewer(type = 'qual', palette = 6) + 
   theme(text = element_text(size = 16), axis.text.x = element_text(angle = 30)) + 
   labs(y = 'Pearson Correlation')
-p1 
+
 # finetuning makes it possible to predict mycn status (tumor samples => cell lines)
 # import stats without finetuning 
-folder <- '/fast/AG_Akalin/buyar/flexynesis_manuscript_work/analyses/finetuning'
 
+
+workdir <- file.path(projDir, "finetuning_neuroblastoma")
 # no finetuning
-dt1 <- data.table::fread(file.path(folder, 'neur.stats.csv'))
+dt1 <- data.table::fread(file.path(workdir, 'neur.stats.csv'))
 dt1$method <- 'supervised_vae'
-dt1 <- rbind(dt1, data.table::fread(file.path(folder, 'neur.baseline.stats.csv')))
+dt1 <- rbind(dt1, data.table::fread(file.path(workdir, 'neur.baseline.stats.csv')))
 dt1$finetuning <- 'no_finetuning'
 # with finetuning 
-dt2 <- data.table::fread(file.path(folder, 'neur_finetuned.stats.csv'))
+dt2 <- data.table::fread(file.path(workdir, 'neur_finetuned.stats.csv'))
 dt2$method <- 'supervised_vae'
 dt2$finetuning <- 'with_finetuning' 
 dt <- rbind(dt1, dt2)

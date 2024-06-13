@@ -5,8 +5,12 @@ library(ggpubr)
 library(ggrepel)
 ggplot2::theme_set(ggpubr::theme_pubclean())
 
-source('/fast/AG_Akalin/buyar/flexynesis_manuscript_work/flexynesis_manuscript/src/utils.R')
-folder <- '/fast/AG_Akalin/buyar/flexynesis_manuscript_work/analyses/unsupervised_cancertype/'
+args <- commandArgs(trailingOnly = T)
+
+utils_script <- args[1]
+folder <- args[2]
+
+source(utils_script)
 
 get_plot <- function(df_tsne, factors, label_size = 5) {
   centroids <- data.frame(get_basis_matrix(df_tsne, factors))
