@@ -40,7 +40,46 @@ PREPARED datasets used as input to flexynesis
 The ``./prepared`` folder contains:
 
 * **ccle_vs_gdsc**: Drug response data from cell lines from CCLE and GDSC2 datasets.
-  Command: ``/opt/R/4.2/bin/Rscript /fast/AG_Akalin/buyar/flexynesis_manuscript_work/flexynesis_manuscript/src/prepare_data.gdsc_vs_ccle.R raw/``
+  Command: 
+.. code-block:: bash 
+
+    /opt/R/4.2/bin/Rscript ./src/prepare_data.gdsc_vs_ccle.R raw/
+
+* **lgggbm_tcga_pub_processed**: Merged cohorts of LGG + GBM samples.
+  Command: 
+
+.. code-block:: bash 
+
+    /opt/R/4.2/bin/Rscript ./src/prepare_data.LGG_GBM.R ./src/get_cbioportal_data.R
+
+* **brca_metabric_processed**: METABRIC dataset processed.
+.. code-block:: bash 
+
+    /opt/R/4.2/bin/Rscript ./src/prepare_data.metabric.R ./src/get_cbioportal_data.R
+
+* **single_cell_bonemarrow**: CITE-Seq dataset from Seurat.
+  Command: 
+.. code-block:: bash 
+
+    /opt/R/4.2/bin/Rscript ./src/prepare_data.cite_seq.R
+
+* **neuroblastoma_target_vs_depmap**: neuroblastoma patient samples (TARGET study) and cell lines (depmap).
+  Command: 
+.. code-block:: bash 
+
+    /opt/R/4.2/bin/Rscript ./src/prepare_data.neuroblastoma_finetuning.R ./src/get_cbioportal_data.R ./raw/depmap/ ./src/utils.R
+
+* **tcga_cancertype**: TCGA cancer cohort for ~21 cancer types 100 samples per each cohort.
+  Command: 
+.. code-block:: bash 
+
+    /opt/R/4.2/bin/Rscript ./src/prepare_data.tcga_cancertype.R ./src/utils.R ./raw/GDCdata
+
+* **depmap_gene_dependency**: Dataset for gene-dependency prediction in cell lines. Consists of depmap gene expression + prottrans embeddings + describeprot features.
+  Command: 
+.. code-block:: bash 
+
+    /opt/R/4.2/bin/Rscript ./src/prepare_data.depmap.R ./src/utils.R ./raw/depmap/ ./raw/prot-trans/embeddings.protein_level.csv ./raw/uniprot2hgnc.RDS ./raw/describePROT/9606_value.csv
 
 Environment
 ===========
@@ -78,4 +117,3 @@ Manuscript
 * `Link to flexynesis package repo <https://github.com/BIMSBbioinfo/flexynesis>`_
 * `Link to flexynesis-benchmarks package repo <https://github.com/BIMSBbioinfo/flexynesis-benchmarks>`_
 * `Link to gdrive for graphical abstract afdesign <https://drive.google.com/file/d/1-R8KrQTxgo9ocdqsliEd8NC7Ntb5hp7I/view?usp=drive_link>`_
-
