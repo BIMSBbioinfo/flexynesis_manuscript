@@ -5,6 +5,11 @@
 args <- commandArgs(trailingOnly = T)
 
 utils_script <- args[1]
+depmapDir <- args[2]
+prottrans_embeddings <- args[3]
+uniprot2hgnc_file <- args[4]
+describeProtFile <- args[5]
+
 library(data.table)
 
 source(utils_script)
@@ -12,7 +17,6 @@ source(utils_script)
 # 1. ### get DEPMAP data ### 
 message(date(), " => reading DEPMAP data")
 # read gene expression data from depmap 
-depmapDir <- '/data/local/buyar/arcas/collaborations/neuroblastoma/data/depmap'
 gex <- data.table::fread(file.path(depmapDir, 'OmicsExpressionProteinCodingGenesTPMLogp1.csv'))
 gex <- as.matrix(data.frame(gex[,-1], row.names = gex[[1]], check.names = F))
 # cleanup gene names 
@@ -32,9 +36,9 @@ colnames(crispr) <- sub("^(.+?) \\(.+$", "\\1", colnames(crispr))
 message(date(), " => reading prot-trans protein embeddings")
 # now we want to add more gene-level features from language models and describeprot
 # read protein-level prot-trans embeddings
-dt <- data.table::fread('/data/local/buyar/arcas/protein_embeddings/prot_trans/embeddings/uniprot/embeddings.protein_level.csv')
+dt <- data.table::fread(prottrans_embeddings) 
 # convert prot-trans uniprot accessions to gene names 
-uniprot2genenames <- readRDS('/data/local/buyar/datasets/uniprot2hgnc.RDS')
+uniprot2genenames <- readRDS(uniprot2hgnc_file) 
 uniprot2genenames$geneName <- sub("^sp.+\\|(.+?)_HUMAN.+$", "\\1", uniprot2genenames$geneName)
 # to have unique mapping we do some processing
 mdt <- melt.data.table(dt, id.vars = 'V1')
@@ -50,7 +54,7 @@ protTrans <- data.frame(protTrans[,-1], check.names = F, row.names = paste0('pro
 message(date(), " => reading describe prot protein features")
 # get DescribeProt feautures 
 # read describe prot feature scores 
-dt <- data.table::fread('/data/local/buyar/datasets/describePROT/9606_value.csv', skip = 21)
+dt <- data.table::fread(describeProtFile, skip = 21)
 # convert uniprot accessions to gene names
 mdt <- melt.data.table(dt, id.vars = 'ACC', measure.vars = colnames(dt)[-(1:3)])
 mdt$geneName <- uniprot2genenames[match(mdt$ACC, uniprotAccession)]$geneName
@@ -90,7 +94,7 @@ dat$clin <- t(dat$clin) # transpose clin data
 dat_split <- split_dat(dat, ratio = 0.8)
 
 message(date(), "=> printing dataset")
-print_dataset(dat_split, "depmap")
+print_dataset(dat_split, "depmap_gene_dependency")
 
 message(date(), " => finished preparing depmap dataset")
 
