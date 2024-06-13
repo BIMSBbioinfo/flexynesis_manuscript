@@ -123,6 +123,7 @@ Figure 6: demonstration of fine-tuning
 -------------------
 
 .. code-block:: bash
+
    /opt/R/4.2/bin/Rscript ../flexynesis_manuscript/src/figures_finetuning.R ../flexynesis_manuscript/src/utils.R finetuning/
 
 
