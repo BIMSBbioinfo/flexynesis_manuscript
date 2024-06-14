@@ -165,6 +165,15 @@ Activate environment
     source ./manuscript/etc/profile
     conda activate flexynesis
 
+Documentation
+===========
+
+Flexynesis documentation is built and served on bimsbstatic. 
+
+1. Navigate to `/data/bimsbstatic/public/akalin/buyar/flexynesis`
+2. Run `mkdocs build` => this generates a website in `./site`
+3. The documentation is served at https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis/site/
+
 Manuscript
 ==========
 
