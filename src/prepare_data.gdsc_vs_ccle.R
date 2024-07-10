@@ -55,21 +55,40 @@ print_dataset <- function(dat, outdir) {
   })
 }
 
-message(date(), " => importing CCLE")
-ccle <- readRDS(file.path(dataDir, 'CCLE.rds'))
-ccle <- PharmacoGx::updateObject(ccle)
-ccle_dat <- get_omics(ccle, c('rna', 'cnv'))
+convert_ids2names <- function(M, ens2hgnc) {
+  df <- data.frame(M, check.names = F)
+  dim(df)
+  df$names <- ens2hgnc[match(rownames(M), ref_gene_id)]$hgnc_symbol
+  dim(df)
+  # drop non-unique and NA 
+  df <- df[!is.na(df$names),]
+  dim(df)
+  df <- df[!BiocGenerics::duplicated(df$names),]
+  rownames(df) <- df$names
+  df$names <- NULL
+  return(as.matrix(df))
+}
 
+# to convert gene ids to names 
+ens2hgnc <- readRDS(file.path(dataDir, 'ens2hgnc.RDS'))
+
+
+message(date(), " => importing CCLE")
+ccle <- readRDS(file.path(dataDir,  'CCLE.rds'))
+ccle <- PharmacoGx::updateObject(ccle)
+ccle_dat <- get_omics(ccle, c('rna', 'cnv', 'mutation'))
+# convert gene ids to names 
+ccle_dat$rna <- convert_ids2names(ccle_dat$rna, ens2hgnc)
 lapply(ccle_dat, dim)
 
 message(date(), " => importing GDSC2")
 gdsc <- readRDS(file.path(dataDir, 'GDSC2.rds'))
 gdsc <- PharmacoGx::updateObject(gdsc)
-gdsc_dat <- get_omics(gdsc, c('rna', 'cnv')) # ignoring mutation data because there is too few (68 genes; also with many NA values)
-
+gdsc_dat <- get_omics(gdsc, c('rna', 'cnv', 'mutation'))
+gdsc_dat$rna <- convert_ids2names(gdsc_dat$rna, ens2hgnc)
 lapply(gdsc_dat, dim)
 
-outdir <- file.path(dataDir, 'gdsc_vs_ccle')
+outdir <- file.path(dataDir, '..', 'prepared', 'gdsc_vs_ccle_test')
 if(!dir.exists(outdir)) {
   dir.create(outdir)
 }
