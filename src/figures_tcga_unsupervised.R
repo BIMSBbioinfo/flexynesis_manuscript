@@ -37,14 +37,23 @@ p1 <- get_plot(df_tsne, as.factor(clusters[rownames(df_tsne), 'cluster']), label
 p1 
 p2 <- get_plot(df_tsne, as.factor(clusters[rownames(df_tsne), 'cohort']), label_size = 5)
 p2
-p3 <- plot_cluster_comparison(clusters[,'cluster',drop=F], clusters[,'cohort',drop=F])
-p3
 
-p <- cowplot::plot_grid(cowplot::plot_grid(p1, p2, ncol = 1, labels = c('A', 'B')), 
-                   p3, nrow = 1, rel_widths = c(1.5, 1), labels = c('A', 'C'))
+# plot correspondence between cluster labels and cancer types 
+m <- table(clusters$cohort, clusters$cluster)
+m <- t(apply(m, 1, function(x) round(x/sum(x)*100,1)))
+colors <- colorRampPalette(c("white",'darkblue', "red"))(100)
+ami <- aricode::AMI(clusters$cohort, clusters$cluster)
+p3 <- pheatmap::pheatmap(m, silent = F, cluster_rows = T, cluster_cols = T, 
+                   display_numbers = F, color = colors, cellwidth = 20, cellheight = 10,
+                   treeheight_row = 0, treeheight_col = 0, 
+                   main = paste0("Correspondence between cluster labels and cancer types\nAdjusted Mutual Information: ",round(ami,2)))
+p <- cowplot::plot_grid(cowplot::plot_grid(p1, p2, ncol = 2, labels = c('A', 'B')), 
+                   p3$gtable, nrow = 2, labels = c('A', 'C'))
 
 ggsave(filename = 'tcga_cancertype_clustering.pdf', 
        plot = p, width = 10, height = 8)
+
+
 
 
 
