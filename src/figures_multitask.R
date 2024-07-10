@@ -64,6 +64,8 @@ combine_plots <- function(plotlist, labels) {
       return(cowplot::plot_grid(p1, p2))
     }),
     labels = labels,
+    label_x = 0,
+    hjust = 0,
     nrow = 3, 
     scale = 0.9
   )
@@ -71,7 +73,9 @@ combine_plots <- function(plotlist, labels) {
 }
 
 # reorder:
-p <- combine_plots(plots, labels = 'AUTO')
+p <- combine_plots(plots, labels = c('A) single-task learning: subtype', 
+                                     'B) single-task learning: chemotherapy response',
+                                     'C) multi-task learning: both subtype and chemotherapy response'))
 
 # Combine all 
 ggsave(filename = 'metabric_multitask_plot.pdf', plot = p, width = 210, height = 297, units = 'mm')
