@@ -37,6 +37,7 @@
     (specification->package "r-umap")
     (specification->package "r-rtsne")
     (specification->package "r-survminer")
+    (specification->package "r-aricode")
     ;; Additional packages as needed
     ))
 
