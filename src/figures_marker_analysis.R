@@ -48,12 +48,14 @@ imp[grep('ENSG', name)]$genename <- ens2hgnc[match(imp[grep('ENSG', name)]$name,
 
 civic <- data.table::fread('/fast/AG_Akalin/buyar/flexynesis_manuscript_work/analyses/marker_analysis/01-Jan-2023-ClinicalEvidenceSummaries.tsv')
 
+best$label <- paste0(best$data_types, "\n", best$tool)
 p1 <- ggplot(best, aes(x = reorder(var, value), y = value)) + 
   geom_bar(stat = 'identity', position = 'dodge', fill = 'red', alpha = 0.5) +
-  geom_text(aes(label = paste(data_types, tool)), y = 0.01, hjust = 0, size = 4) + 
-  theme(axis.title.y = element_blank()) + 
-  labs(y = 'Best Pearson Correlation') + coord_flip()
+  geom_text(aes(label = label), y = 0.01, angle = 90, hjust = 0) + 
+  theme(axis.title.x = element_blank(), axis.text.x = element_text(angle = 45)) + 
+  labs(y = 'Best Pearson Correlation')
 
+p1
 plots <- list()
 plots[[1]] <- p1
 
@@ -73,10 +75,13 @@ plots <- c(plots, lapply(unique(imp$target_variable), function(x) {
     labs(title = x) + coord_flip() + theme(axis.title.y = element_blank())
 }))
 
-p <- cowplot::plot_grid(plotlist = plots, nrow = 3, labels = 'AUTO')
+p <- cowplot::plot_grid(cowplot::plot_grid(cowplot::ggdraw(), plots[[1]], cowplot::ggdraw(), 
+                                      ncol = 1, rel_heights = c(1, 3, 1)), 
+                   cowplot::plot_grid(plotlist = plots[2:9], nrow = 4),
+                   ncol = 2, rel_widths = c(1, 2), labels = c('A', 'B'))
 
 ggsave(filename = 'marker_analysis.pdf', 
-       plot = p, width = 11, height = 8)
+       plot = p, width = 11, height = 9)
 
 
 # # import drug response values and see if we can see different distributions in marker combinations 
