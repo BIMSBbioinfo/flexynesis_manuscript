@@ -38,6 +38,8 @@
     (specification->package "r-rtsne")
     (specification->package "r-survminer")
     (specification->package "r-aricode")
+    (specification->package "r-openxlsx")
+    (specification->package "r-gridextra")
     ;; Additional packages as needed
     ))
 
