@@ -140,6 +140,11 @@ Figure 7: marker analysis
 
    Rscript ../flexynesis_manuscript/src/figures_marker_analysis.R ../flexynesis_manuscript/src/utils.R marker_analysis/output/
 
+Figure 8: benchmark summary
+
+.. code-block:: bash
+
+  Rscript ../flexynesis_manuscript/src/figures_benchmarks.R benchmarks/output2 
 
     
 Environment
