@@ -39,7 +39,7 @@ dt$finetuning <- ifelse(dt$finetuning_samples > 0, 'with_finetuning', 'no_finetu
 
 # main figure, top 10 per group
 dt_sub <- dt[order(score, decreasing = T),.SD[1], by = c('group')]
-p1 <- gridExtra::tableGrob(dt_sub[,c('task','var', 'tool', 'fusion', 'finetuning', 
+p1 <- gridExtra::tableGrob(dt_sub[,c('task','var', 'tool', 'fusion', 'finetuning', 'data_types',
                                      'metric', 'value')]) 
 
 # dt_sub <- dt[order(score, decreasing = T),.SD[1:3], by = c('group')]
@@ -84,12 +84,13 @@ p5 <- ggboxplot(dt[tool == 'GNN', .SD[which.max(score)], by = c('gnn_conv', 'gro
 
 
 p <- cowplot::plot_grid(p1, 
-                   cowplot::plot_grid(p2, p3, p4, p5, nrow = 1, 
+                   cowplot::plot_grid(p2, p3, p4, p5, nrow = 2, 
                                       labels = c('B', 'C', 'D', 'E')), 
-                   ncol = 1, labels = c('A', ''))
+                   ncol = 1, labels = c('A', ''), 
+                   rel_heights = c(1, 1))
 
 ggsave(filename = 'benchmark_summary.pdf', 
-       plot = p, width = 13, height = 9)
+       plot = p, width = 11, height = 10)
 
 
 # save benchmark stats in table:
