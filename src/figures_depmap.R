@@ -91,9 +91,12 @@ results <- do.call(rbind, lapply(c('gex', 'gex_pt', 'gex_pt_dp'), function(x) {
 labels <- list('gex' = 'gex_only', 
                'gex_pt' = 'gex\n+protein embeddings', 
                'gex_pt_dp' = 'gex\n+protein embeddings\n+describeProt')
-results$group <- ifelse(results$split == 'train', 
+
+results$group <- as.factor(ifelse(results$split == 'train', 
                         paste0("Training samples: N=",results[split == 'train']$N[1]), 
-                        paste0("Test samples: N=",results[split == 'test']$N[1]))
+                        paste0("Test samples: N=",results[split == 'test']$N[1])))
+results$group <- factor(results$group, levels = rev(levels(results$group)))
+
 results$features <- as.character(labels[results$analysis])
 
 p1 <- ggboxplot(results, x = 'features', y = 'cor', fill = 'features', 
