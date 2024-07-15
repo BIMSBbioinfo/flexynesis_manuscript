@@ -56,18 +56,22 @@ dt2$method <- 'supervised_vae'
 dt2$finetuning <- 'with_finetuning' 
 dt <- rbind(dt1, dt2)
 
-p2 <- ggplot(dt[metric != 'kappa'], aes(x = method, y = value)) + 
-  geom_bar(stat = 'identity', aes(fill = finetuning), position = 'dodge') + 
-  facet_grid(~ metric) + 
-  scale_fill_brewer(type = 'qual', palette = 6) +
-  theme(text = element_text(size = 16), legend.position = 'none') + coord_flip()
+dt$method2 <- paste(dt$method, dt$finetuning, sep = '\n')
+
+p2 <- ggplot(dt[metric == 'f1_score'], aes(x = reorder(method2, -value), y = value)) + 
+  geom_bar(stat = 'identity', aes(fill = value), position = 'dodge', width = 0.5) + 
+  theme(text = element_text(size = 16), legend.position = 'none') +
+  labs(y = 'F1 Score', x = 'Method') 
 
 
-p <- cowplot::plot_grid(p1, p2, ncol = 1, rel_heights = c(3, 1), rel_widths = c(2, 1), 
+p <- cowplot::plot_grid(p1, 
+                   cowplot::plot_grid(cowplot::ggdraw(), p2, cowplot::ggdraw(), nrow = 1,
+                                      rel_widths = c(1,5,1)), 
+                   ncol = 1, rel_heights = c(2, 1), 
                    labels = 'AUTO')
 
 ggsave(filename = 'finetuning.pdf', 
-       plot = p, width = 10, height = 8)
+       plot = p, width = 11, height = 9)
 
 
   
