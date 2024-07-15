@@ -89,12 +89,18 @@ How to reproduce figures:
 
 Go to ``/fast/AG_Akalin/buyar/flexynesis_manuscript_work/analyses``:
 
+Activate guix environment: 
+.. code-block:: bash
+
+	source ../flexynesis_manuscript/manuscript/etc/profile 
+
+
 Figure 1: single-task figures
 -------------------------------
 
 .. code-block:: bash
 
-   /opt/R/4.2/bin/Rscript ../flexynesis_manuscript/src/figures_single_task.R ../flexynesis_manuscript/src/utils.R ./output2
+   Rscript ../flexynesis_manuscript/src/figures_single_task.R ../flexynesis_manuscript/src/utils.R ./output2
 
 
 Figures 2 and 3: multi-task figures
@@ -102,21 +108,21 @@ Figures 2 and 3: multi-task figures
 
 .. code-block:: bash
 
-   /opt/R/4.2/bin/Rscript ../flexynesis_manuscript/src/figures_multitask.R ../flexynesis_manuscript/src/utils.R ./output2
+   Rscript ../flexynesis_manuscript/src/figures_multitask.R ../flexynesis_manuscript/src/utils.R ./output2
 
 Figure 4: unsupervised clustering (tcga cancer types)
 -------------------------------
 
 .. code-block:: bash 
 
-   /opt/R/4.2/bin/Rscript ../flexynesis_manuscript/src/figures_tcga_unsupervised.R ../flexynesis_manuscript/src/utils.R ./unsupervised_cancertype/
+   Rscript ../flexynesis_manuscript/src/figures_tcga_unsupervised.R ../flexynesis_manuscript/src/utils.R ./unsupervised_cancertype/
 
 Figure 5: cross-modality prediction of cell line dependency probabilities 
 -------------------------------
 
 .. code-block:: bash 
 
-   /opt/R/4.2/bin/Rscript ../flexynesis_manuscript/src/figures_depmap.R ../datasets/prepared/depmap_gene_dependency/ depmap_analysis/output/
+   Rscript ../flexynesis_manuscript/src/figures_depmap.R ../datasets/prepared/depmap_gene_dependency/ depmap_analysis/output/
 
 
 Figure 6: demonstration of fine-tuning
@@ -124,7 +130,7 @@ Figure 6: demonstration of fine-tuning
 
 .. code-block:: bash
 
-   /opt/R/4.2/bin/Rscript ../flexynesis_manuscript/src/figures_finetuning.R ../flexynesis_manuscript/src/utils.R finetuning/
+   Rscript ../flexynesis_manuscript/src/figures_finetuning.R ../flexynesis_manuscript/src/utils.R finetuning/
 
 
 Figure 7: marker analysis 
@@ -132,7 +138,7 @@ Figure 7: marker analysis
 
 .. code-block:: bash 
 
-   /opt/R/4.2/bin/Rscript ../flexynesis_manuscript/src/figures_marker_analysis.R ../flexynesis_manuscript/src/utils.R marker_analysis/output/
+   Rscript ../flexynesis_manuscript/src/figures_marker_analysis.R ../flexynesis_manuscript/src/utils.R marker_analysis/output/
 
 
     
