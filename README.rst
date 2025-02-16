@@ -3,9 +3,10 @@ Flexynesis manuscript material
 ======================
 
 Publication material relevant for the manuscript describing the flexynesis software package. 
-Our manuscript currently available at [BioRxiv](https://biorxiv.org/cgi/content/short/2024.07.16.603606v1). 
 
-See our github repository of [Flexynesis](https://github.com/BIMSBbioinfo/flexynesis) 
+Our manuscript currently available at `BioRxiv <https://biorxiv.org/cgi/content/short/2024.07.16.603606v1>`_. 
+
+See our github repository of `Flexynesis <https://github.com/BIMSBbioinfo/flexynesis>`_. 
 
 Datasets used in the manuscript
 -------------------------------
