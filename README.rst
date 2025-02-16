@@ -59,33 +59,39 @@ For the different use-cases described in the manuscript, Flexynesis output (alon
 can be downloaded from here: 
 https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/manuscript_processed_data.tgz
 
-
 Figures
 ==========
 
 Assuming the prepared datasets and Flexynesis output files are downloaded from the following locations:
 
-    - Datasets: https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/datasets_prepared.tgz
-    - Flexynesis output: https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/manuscript_processed_data.tgz
+- Datasets: https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/datasets_prepared.tgz
+- Flexynesis output: https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/manuscript_processed_data.tgz
 
 The figures in the manuscript can be reproduced using the following instructions: 
 
 Unzip the Flexynesis datasets and output folders:
+
 .. code-block:: bash
+
     tar -xzvf manuscript_processed_data.tgz
     tar -xzvf datasets_prepare.tgz 
 
 Clone the manuscript repo:
+
 .. code-block:: bash 
+
     git clone https://github.com/BIMSBbioinfo/flexynesis_manuscript.git
 
 Activate guix environment: 
+
 .. code-block:: bash
 
     source ./flexynesis_manuscript/manuscript/etc/profile 
 
 Change to folder with Flexynesis output data
+
 .. code-block:: bash
+
     cd manuscript_processed_data
 
 Figure 1: single-task figures
