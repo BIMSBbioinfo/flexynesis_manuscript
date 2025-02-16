@@ -1,0 +1,41 @@
+(use-modules (gnu)
+             (guix profiles)
+             (guix packages)
+             (guix utils)
+             (guix download)
+             (guix build-system gnu)
+             (guix licenses)
+             ;; Import modules for Python and R packages
+             (gnu packages python)
+             (gnu packages bioinformatics)
+             (gnu packages statistics)
+)
+
+;; Define the list of packages
+(define my-packages
+  (list
+    (specification->package "mamba")
+    (specification->package "r")
+    (specification->package "r-data-table")
+    (specification->package "r-yaml")
+    (specification->package "r-ggplot2")
+    (specification->package "r-knitr")
+    (specification->package "r-ggrepel")
+    (specification->package "r-pbapply")
+    (specification->package "r-biostrings")
+    (specification->package "r-rmarkdown")
+    (specification->package "r-ggpubr")
+    (specification->package "r-pheatmap")
+    (specification->package "r-pharmacogx")
+    (specification->package "r-umap")
+    (specification->package "r-rtsne")
+    (specification->package "r-survminer")
+    (specification->package "r-aricode")
+    (specification->package "r-openxlsx")
+    (specification->package "r-gridextra")
+    (specification->package "r-readr")
+    ))
+
+;; Convert the list of packages to a manifest
+(packages->manifest my-packages)
+
