@@ -53,12 +53,51 @@ The ``./prepared`` folder contains:
 
 * **depmap_gene_dependency**: Dataset for gene-dependency prediction in cell lines. Consists of depmap gene expression + prottrans embeddings + describeprot features.
 
+* **panGI_msi**: Gene expression and promoter methylation data from 7 different TCGA cohorts (gastrointestinal and gynocological cancers) with microsatellite instability (MSI) annotations: TCGA-COAD (Colon Adenocarcinoma), TCGA-ESCA (Esophageal Carcinoma), TCGA-PAAD (Pancreatic Adenocarcinoma), TCGA-READ (Rectum Adenocarcinoma), TCGA-STAD (Stomach Adenocarcinoma), TCGA-UCEC (Uterine Corpus Endometrial Carcinoma), TCGA-UCS (Uterine Carcinosarcoma). 
+
 Flexynesis output for use-cases
 ==============================
 
 For the different use-cases described in the manuscript, Flexynesis output (along with the configurations used) 
 can be downloaded from here: 
 https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/manuscript_processed_data.tgz
+
+
+Environment
+===========
+
+Clone the manuscript repo:
+-------------------
+
+.. code-block:: bash 
+
+    git clone https://github.com/BIMSBbioinfo/flexynesis_manuscript.git
+
+
+Install flexynesis
+-------------------
+
+.. code-block:: bash
+
+    mamba create -n flexynesisenv python==3.11 snakemake 
+    mamba activate flexynesisenv
+    pip install flexynesis 
+
+Install other packages
+----------------------
+
+.. code-block:: bash
+
+    guix package --manifest=guix.scm --profile=./manuscript
+
+Activate environment
+--------------------
+
+.. code-block:: bash
+
+    source ./manuscript/etc/profile
+    mamba activate flexynesisenv
+
 
 Figures
 ==========
@@ -77,12 +116,6 @@ Unzip the Flexynesis datasets and output folders:
     tar -xzvf manuscript_processed_data.tgz
     tar -xzvf datasets_prepare.tgz 
 
-Clone the manuscript repo:
-
-.. code-block:: bash 
-
-    git clone https://github.com/BIMSBbioinfo/flexynesis_manuscript.git
-
 Activate guix environment: 
 
 .. code-block:: bash
@@ -100,7 +133,7 @@ Figure 1: single-task figures
 
 .. code-block:: bash
 
-   Rscript ../flexynesis_manuscript/src/figures_single_task.R ../flexynesis_manuscript/src/utils.R single_multi_experiments
+   Rscript ../flexynesis_manuscript/src/figures_single_task.R ../flexynesis_manuscript/src/utils.R single_multi_experiments panGI_MSI_analysis/output
 
 
 Figures 2 and 3: multi-task figures
@@ -115,7 +148,7 @@ Figure 4: unsupervised clustering (tcga cancer types)
 
 .. code-block:: bash 
 
-   Rscript ../flexynesis_manuscript/src/figures_tcga_unsupervised.R ../flexynesis_manuscript/src/utils.R unsupervised_cancertype/
+   Rscript ../flexynesis_manuscript/src/figures_tcga_unsupervised.R ../flexynesis_manuscript/src/utils.R ./unsupervised_cancertype/
 
 Figure 5: cross-modality prediction of cell line dependency probabilities 
 -------------------------------
@@ -132,7 +165,6 @@ Figure 6: demonstration of fine-tuning
 
    Rscript ../flexynesis_manuscript/src/figures_finetuning.R ../flexynesis_manuscript/src/utils.R finetuning/
 
-
 Figure 7: marker analysis 
 -------------------------------
 
@@ -148,5 +180,11 @@ Figure 8: benchmark summary
   Rscript ../flexynesis_manuscript/src/figures_benchmarks.R benchmarks/output 
 
     
+Supp Figure: Run Times & Resources 
+-------------------------------
+
+.. code-block:: bash
+
+  Rscript ../flexynesis_manuscript/src/figures_runtimes.R runtimes/output
 
 
