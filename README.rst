@@ -1,6 +1,6 @@
-======================
+==============================
 Flexynesis manuscript material
-======================
+==============================
 
 Publication material relevant for the manuscript describing the flexynesis software package. 
 
@@ -9,10 +9,10 @@ Our manuscript currently available at `BioRxiv <https://biorxiv.org/cgi/content/
 See our github repository of `Flexynesis <https://github.com/BIMSBbioinfo/flexynesis>`_. 
 
 Datasets used in the manuscript
--------------------------------
+===============================
 
 Publicly available datasets 
-^^^^^^^^^^^^^^^^^^^
+---------------------------
 
 * **CCLE.rds**: downloaded from `Zenodo <https://zenodo.org/record/3905462/files/CCLE.rds?download=1>`_.
 * **GDSC2.rds**: downloaded from `Zenodo <https://zenodo.org/record/3905481/files/GDSC2.rds?download=1>`_.
@@ -29,7 +29,7 @@ Publicly available datasets
 
 
 PREPARED datasets used as input to Flexynesis
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------------
 
 The datasets listed above were further processed to create train/test splits for training using Flexynesis. 
 The prepared datasets can be downloaded from here: 
@@ -54,7 +54,7 @@ The ``./prepared`` folder contains:
 * **panGI_msi**: Gene expression and promoter methylation data from 7 different TCGA cohorts (gastrointestinal and gynocological cancers) with microsatellite instability (MSI) annotations: TCGA-COAD (Colon Adenocarcinoma), TCGA-ESCA (Esophageal Carcinoma), TCGA-PAAD (Pancreatic Adenocarcinoma), TCGA-READ (Rectum Adenocarcinoma), TCGA-STAD (Stomach Adenocarcinoma), TCGA-UCEC (Uterine Corpus Endometrial Carcinoma), TCGA-UCS (Uterine Carcinosarcoma). 
 
 Flexynesis output for use-cases
-==============================
+-------------------------------
 
 For the different use-cases described in the manuscript, Flexynesis output (along with the configurations used) 
 can be downloaded from here: 
@@ -64,7 +64,7 @@ Environment
 ===========
 
 Clone the manuscript repo:
--------------------
+--------------------------
 
 .. code-block:: bash 
 
@@ -97,7 +97,7 @@ Activate environment
 
 
 Figures
-==========
+=======
 
 Assuming the prepared datasets and Flexynesis output files are downloaded from the following locations:
 
@@ -126,7 +126,7 @@ Change to folder with Flexynesis output data
     cd manuscript_processed_data
 
 Figure 1: single-task figures
--------------------------------
+-----------------------------
 
 .. code-block:: bash
 
@@ -134,21 +134,21 @@ Figure 1: single-task figures
 
 
 Figures 2 and 3: multi-task figures
--------------------------------
+-----------------------------------
 
 .. code-block:: bash
 
    Rscript ../flexynesis_manuscript/src/figures_multitask.R ../flexynesis_manuscript/src/utils.R single_multi_experiments
 
 Figure 4: unsupervised clustering (tcga cancer types)
--------------------------------
+-----------------------------------------------------
 
 .. code-block:: bash 
 
    Rscript ../flexynesis_manuscript/src/figures_tcga_unsupervised.R ../flexynesis_manuscript/src/utils.R ./unsupervised_cancertype/
 
 Figure 5: cross-modality prediction of cell line dependency probabilities 
--------------------------------
+-------------------------------------------------------------------------
 
 .. code-block:: bash 
 
@@ -156,21 +156,21 @@ Figure 5: cross-modality prediction of cell line dependency probabilities
 
 
 Figure 6: demonstration of fine-tuning
--------------------------------
+--------------------------------------
 
 .. code-block:: bash
 
    Rscript ../flexynesis_manuscript/src/figures_finetuning.R ../flexynesis_manuscript/src/utils.R finetuning/
 
 Figure 7: marker analysis 
--------------------------------
+-------------------------
 
 .. code-block:: bash 
 
    Rscript ../flexynesis_manuscript/src/figures_marker_analysis.R ../flexynesis_manuscript/src/utils.R marker_analysis/
 
 Figure 8: benchmark summary
--------------------------------
+---------------------------
 
 .. code-block:: bash
 
@@ -178,7 +178,7 @@ Figure 8: benchmark summary
 
     
 Supp Figure: Run Times & Resources 
--------------------------------
+----------------------------------
 
 .. code-block:: bash
 
