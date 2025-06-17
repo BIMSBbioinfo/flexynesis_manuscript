@@ -34,6 +34,7 @@
     (specification->package "r-openxlsx")
     (specification->package "r-gridextra")
     (specification->package "r-readr")
+    (specification->package "r-proc")
     ))
 
 ;; Convert the list of packages to a manifest
