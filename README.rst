@@ -11,8 +11,6 @@ See our github repository of `Flexynesis <https://github.com/BIMSBbioinfo/flexyn
 Datasets used in the manuscript
 -------------------------------
 
-Below is a description of the datasets used in the manuscript and how to prepare them for analysis with flexynesis
-
 Publicly available datasets 
 ^^^^^^^^^^^^^^^^^^^
 
@@ -61,7 +59,6 @@ Flexynesis output for use-cases
 For the different use-cases described in the manuscript, Flexynesis output (along with the configurations used) 
 can be downloaded from here: 
 https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/manuscript_processed_data.tgz
-
 
 Environment
 ===========
