@@ -125,63 +125,80 @@ Change to folder with Flexynesis output data
 
     cd manuscript_processed_data
 
-Figure 1: single-task figures
+Figure 1: Flexynesis workflow 
+-----------------------------
+This figure was manually made.
+
+
+Figure 2: single-task figures
 -----------------------------
 
 .. code-block:: bash
 
-   Rscript ../flexynesis_manuscript/src/figures_single_task.R ../flexynesis_manuscript/src/utils.R single_multi_experiments panGI_MSI_analysis/output
+   Rscript ../flexynesis_manuscript/src/figure2.R ../flexynesis_manuscript/src/utils.R single_multi_experiments panGI_MSI_analysis/output
 
-
-Figures 2 and 3: multi-task figures
+Figures 3 and 4: multi-task figures
 -----------------------------------
 
 .. code-block:: bash
 
-   Rscript ../flexynesis_manuscript/src/figures_multitask.R ../flexynesis_manuscript/src/utils.R single_multi_experiments
+   Rscript ../flexynesis_manuscript/src/figure3_and_4.R ../flexynesis_manuscript/src/utils.R single_multi_experiments
 
-Figure 4: unsupervised clustering (tcga cancer types)
+Figure 5: unsupervised clustering (TCGA cancer types)
 -----------------------------------------------------
 
 .. code-block:: bash 
 
-   Rscript ../flexynesis_manuscript/src/figures_tcga_unsupervised.R ../flexynesis_manuscript/src/utils.R ./unsupervised_cancertype/
+   Rscript ../flexynesis_manuscript/src/figure5.R ../flexynesis_manuscript/src/utils.R ./unsupervised_cancertype/
 
-Figure 5: cross-modality prediction of cell line dependency probabilities 
+Figure 6: cross-modality prediction of cell line dependency probabilities 
 -------------------------------------------------------------------------
 
 .. code-block:: bash 
 
-   Rscript ../flexynesis_manuscript/src/figures_depmap.R ../datasets/prepared/depmap_gene_dependency/ depmap_analysis/output/
+   Rscript ../flexynesis_manuscript/src/figure6.R ../datasets_prepared/depmap_gene_dependency/ depmap_analysis/output/
 
-
-Figure 6: demonstration of fine-tuning
+Figure 7: demonstration of fine-tuning
 --------------------------------------
 
 .. code-block:: bash
 
-   Rscript ../flexynesis_manuscript/src/figures_finetuning.R ../flexynesis_manuscript/src/utils.R finetuning/
+   Rscript ../flexynesis_manuscript/src/figure7.R ../flexynesis_manuscript/src/utils.R finetuning/
 
-Figure 7: marker analysis 
--------------------------
+
+Figure 8 and Supp. Figure 9: marker analysis 
+--------------------------------------------
 
 .. code-block:: bash 
 
-   Rscript ../flexynesis_manuscript/src/figures_marker_analysis.R ../flexynesis_manuscript/src/utils.R marker_analysis/
+   Rscript ../flexynesis_manuscript/src/figure8.R ../flexynesis_manuscript/src/utils.R marker_analysis/
 
-Figure 8: benchmark summary
+Figure 9: benchmark summary
 ---------------------------
 
 .. code-block:: bash
 
-  Rscript ../flexynesis_manuscript/src/figures_benchmarks.R benchmarks/output 
+  Rscript ../flexynesis_manuscript/src/figure9.R benchmarks/output 
 
-    
+Supp Figure 10: Run Times & Resources 
+----------------------------------
+
+.. code-block:: bash
+
+  Rscript ../flexynesis_manuscript/src/supp_figure_10.R runtimes/output
+
 Supp Figure: Run Times & Resources 
 ----------------------------------
 
 .. code-block:: bash
 
   Rscript ../flexynesis_manuscript/src/figures_runtimes.R runtimes/output
+
+Collate all figure source data files
+------------------------------------
+
+.. code-block:: bash
+
+  Rscript ../flexynesis_manuscript/src/collate_figure_source_data.R ../flexynesis_manuscript/data/Figure_Source_Data/
 
 
