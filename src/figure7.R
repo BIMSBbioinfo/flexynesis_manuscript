@@ -84,7 +84,7 @@ plots <- sapply(simplify = F, names(bootstrap_raw_stats), function(x) {
   return(p)
 })
 # Make a main plot 
-p <- cowplot::plot_grid(plots$cancertype, plots$Selumetinib, labels = 'AUTO', 
+p <- cowplot::plot_grid(plots$Selumetinib, plots$cancertype, labels = 'AUTO', 
                         ncol = 1)
 
 ggsave(filename = 'Figure7.pdf', 
