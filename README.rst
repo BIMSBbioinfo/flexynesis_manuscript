@@ -35,8 +35,7 @@ PREPARED datasets used as input to Flexynesis
 ---------------------------------------------
 
 The datasets listed above were further processed to create train/test splits for training using Flexynesis. 
-The prepared datasets can be downloaded from here: 
-https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/datasets_prepared.tgz
+The prepared datasets and the output of Flexynesis model training can be downloaded from Zenodo archive: https://zenodo.org/records/16442998
 
 The ``./prepared`` folder contains:
 
@@ -104,8 +103,9 @@ Figures
 
 Assuming the prepared datasets and Flexynesis output files are downloaded from the following locations:
 
-- Datasets: https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/datasets_prepared.tgz
-- Flexynesis output: https://bimsbstatic.mdc-berlin.de/akalin/buyar/flexynesis_manuscript_material/manuscript_processed_data.tgz
+- Datasets: https://zenodo.org/records/16442998/files/datasets_prepared.tgz
+
+- Flexynesis output: https://zenodo.org/records/16442998/files/manuscript_processed_data.tgz
 
 The figures in the manuscript can be reproduced using the following instructions: 
 
