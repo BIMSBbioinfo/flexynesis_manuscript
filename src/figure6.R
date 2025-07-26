@@ -116,29 +116,13 @@ p1 <- ggviolin(results[split == 'test'],
   theme(text = element_text(size = 14), legend.position = "right") +  # Improve readability
   scale_color_brewer(type = 'qual', palette = 6) 
 
-
-# stats <- do.call(rbind, lapply(c('gex', 'gex_pt', 'gex_pt_dp'), function(x) {
-#   message(date(), " => Analysing ",x,"\n")
-#   dt <- data.table::fread(file.path(output_path, 
-#                                     paste0(x, '.stats.csv')))
-#   dt$analysis <- x
-#   return(dt)
-# }))
-# 
-# stats$features <- as.character(labels[stats$analysis])
-# 
-# p2 <- ggbarplot(stats[metric == 'pearson_corr'], x = 'features', y = 'value', fill = 'features') +
-#   theme(text = element_text(size = 12),
-#         axis.text.x = element_text(angle = 15, hjust = 1), 
-#         legend.position = 'none') + 
-#   labs(y = "Pearson Correlation\n(predicted vs known hubness)")
-# 
-# p <- cowplot::plot_grid(p1, p2, labels = 'AUTO', rel_widths = c(2, 1.2))
-
-ggsave(filename = 'depmap_gene_dependency_prediction.pdf', 
+ggsave(filename = 'Figure6.pdf', 
        plot = p1, width = 10, height = 8)
 
 message(date()," => Finished making the figures")
 
+# print figure source data 
+write.csv(p1$data[,c('sample', 'cor', 'split', 'analysis', 'features', 'hubness')], 
+          file = "Figure6b.source_data.tsv")
 
 
