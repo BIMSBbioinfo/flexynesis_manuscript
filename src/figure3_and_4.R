@@ -49,6 +49,15 @@ plots <- sapply(simplify = F, names(dat), function(run) {
   return(list('p1' = p1, 'p2' = p2))
 })
 
+# collate figure source data 
+fig3_source_data <- list('Figure3a' = plots$CLAUDIN_SUBTYPE$p1$data[,c('tSNE1', 'tSNE2', 'CLAUDIN_SUBTYPE', 'CHEMOTHERAPY')],
+                         'Figure3b' = plots$CHEMOTHERAPY$p1$data[,c('tSNE1', 'tSNE2', 'CLAUDIN_SUBTYPE', 'CHEMOTHERAPY')], 
+                         'Figure3c' = plots$`CLAUDIN_SUBTYPE,CHEMOTHERAPY`$p1$data[,c('tSNE1', 'tSNE2', 'CLAUDIN_SUBTYPE', 'CHEMOTHERAPY')])
+# print figure source data 
+lapply(names(fig3_source_data), function(x) {
+  write.csv(fig3_source_data[[x]], file = paste0(x, ".source_data.tsv"))
+})
+
 combine_plots <- function(plotlist, labels) {
   legend1 <- get_legend(plotlist[[1]]$p1 + theme(legend.box.margin = margin(0, 0, 0, 12)))
   legend2 <- get_legend(plotlist[[1]]$p2 + theme(legend.box.margin = margin(0, 12, 0, 0)))
@@ -78,12 +87,9 @@ p <- combine_plots(plots, labels = c('A) single-task learning: subtype',
                                      'C) multi-task learning: both subtype and chemotherapy response'))
 
 # Combine all 
-ggsave(filename = 'metabric_multitask_plot.pdf', plot = p, width = 14, height = 14)
-ggsave(filename = 'metabric_multitask_plot.jpg', plot = p, width = 210, height = 210, units = 'mm', dpi = 300, bg = 'white')
-
+ggsave(filename = 'Figure3.pdf', plot = p, width = 14, height = 14)
 
 # 2. mixed multi task (reg+class+surv)
-
 pf = stats[target == 'HISTOLOGICAL_DIAGNOSIS,AGE'][task == 'lgg_gbm'][metric == 'cindex'][order(value, decreasing = T)]$prefix[1]
 
 dat <- get_data(pf, 'lgg_gbm', workdir)
@@ -125,10 +131,15 @@ p2 <- cowplot::plot_grid(plotlist = lapply(names(top_markers), function(x) {
 p <- cowplot::plot_grid(p1, p2, labels = 'AUTO')
 
 # Combine all 
-ggsave(filename = 'lgg_gbm_multitask_plot.pdf', plot = p, width = 10, height = 8)
-ggsave(filename = 'lgg_gbm_multitask_plot.jpg', plot = p, width = 10, height = 9, dpi = 300, bg = 'white')
+ggsave(filename = 'Figure4.pdf', plot = p, width = 10, height = 8)
 
+fig4_source_data <- list('Figure4a' = p1$data, 
+                         'Figure4b' = do.call(rbind, top_markers))
 
+# print figure source data 
+lapply(names(fig4_source_data), function(x) {
+  write.csv(fig4_source_data[[x]], file = paste0(x, ".source_data.tsv"))
+})
 
 
 
