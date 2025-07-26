@@ -1,4 +1,5 @@
-[![DOI](https://zenodo.org/badge/933743968.svg)](https://doi.org/10.5281/zenodo.16443730)
+.. image:: https://zenodo.org/badge/933743968.svg
+  :target: https://doi.org/10.5281/zenodo.16443730
 
 ==============================
 Flexynesis manuscript material
