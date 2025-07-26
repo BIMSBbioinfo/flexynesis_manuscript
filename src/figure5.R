@@ -3,6 +3,7 @@ library(data.table)
 library(ggplot2)
 library(ggpubr)
 library(ggrepel)
+library(openxlsx)
 ggplot2::theme_set(ggpubr::theme_pubclean())
 
 args <- commandArgs(trailingOnly = T)
@@ -40,6 +41,14 @@ p2
 
 # plot correspondence between cluster labels and cancer types 
 m <- table(clusters$cohort, clusters$cluster)
+
+# save cluster correspondence as supplementary table
+wb <- createWorkbook()
+addWorksheet(wb, "Fig5C_data")
+writeData(wb, "Fig5C_data", m)
+saveWorkbook(wb, file = "SupplementaryTable3.xlsx", overwrite = TRUE)
+
+
 m <- t(apply(m, 1, function(x) round(x/sum(x)*100,1)))
 colors <- colorRampPalette(c("white",'darkblue', "red"))(100)
 ami <- aricode::AMI(clusters$cohort, clusters$cluster)
@@ -50,10 +59,16 @@ p3 <- pheatmap::pheatmap(m, silent = F, cluster_rows = T, cluster_cols = T,
 p <- cowplot::plot_grid(cowplot::plot_grid(p1, p2, ncol = 2, labels = c('A', 'B')), 
                    p3$gtable, nrow = 2, labels = c('A', 'C'))
 
-ggsave(filename = 'tcga_cancertype_clustering.pdf', 
+ggsave(filename = 'Figure5.pdf', 
        plot = p, width = 10, height = 8)
 
-
+fig5_source_data <- list('Figure5a' = p1$data, 
+                         'Figure5b' = p2$data, 
+                         'Figure5c' = data.frame(m, check.names = F))
+# print figure source data 
+lapply(names(fig5_source_data), function(x) {
+  write.csv(fig5_source_data[[x]], file = paste0(x, ".source_data.tsv"))
+})
 
 
 
