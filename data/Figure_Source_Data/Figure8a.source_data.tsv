@@ -1,0 +1,17 @@
+"","target","prefix","task","tool","gnn_conv","batch","event","time","data_types","fusion","hpo_iter","early_stop_patience","features_min","feature_perc","log_transform","use_loss_weighting","finetuning_samples","method","var","variable_type","metric","value","label"
+"1","Crizotinib","analysis1","ccle_vs_gdsc","DirectPred","",NA,NA,NA,"rna,mutation","intermediate",100,10,100,50,FALSE,TRUE,0,"DirectPred","Crizotinib","numerical","pearson_corr",0.32234208197707,"rna,mutation
+DirectPred"
+"2","Erlotinib","analysis13","ccle_vs_gdsc","DirectPred","",NA,NA,NA,"rna,mutation","intermediate",100,10,100,50,FALSE,TRUE,0,"DirectPred","Erlotinib","numerical","pearson_corr",0.461563133245615,"rna,mutation
+DirectPred"
+"3","Irinotecan","analysis27","ccle_vs_gdsc","supervised_vae","",NA,NA,NA,"rna,cnv,mutation","intermediate",100,10,100,50,FALSE,TRUE,0,"supervised_vae","Irinotecan","numerical","pearson_corr",0.581073102821581,"rna,cnv,mutation
+supervised_vae"
+"4","Lapatinib","analysis36","ccle_vs_gdsc","DirectPred","",NA,NA,NA,"rna,cnv,mutation","intermediate",100,10,100,50,FALSE,TRUE,0,"DirectPred","Lapatinib","numerical","pearson_corr",0.604610817700359,"rna,cnv,mutation
+DirectPred"
+"5","Paclitaxel","analysis51","ccle_vs_gdsc","supervised_vae","",NA,NA,NA,"rna,cnv,mutation","intermediate",100,10,100,50,FALSE,TRUE,0,"supervised_vae","Paclitaxel","numerical","pearson_corr",0.385870702836051,"rna,cnv,mutation
+supervised_vae"
+"6","Palbociclib","analysis63","ccle_vs_gdsc","supervised_vae","",NA,NA,NA,"rna,cnv,mutation","intermediate",100,10,100,50,FALSE,TRUE,0,"supervised_vae","Palbociclib","numerical","pearson_corr",0.4695477137489,"rna,cnv,mutation
+supervised_vae"
+"7","Selumetinib","analysis73","ccle_vs_gdsc","DirectPred","",NA,NA,NA,"rna,mutation","intermediate",100,10,100,50,FALSE,TRUE,0,"DirectPred","Selumetinib","numerical","pearson_corr",0.68221912267052,"rna,mutation
+DirectPred"
+"8","Sorafenib","analysis94","ccle_vs_gdsc","GNN","GC",NA,NA,NA,"rna,mutation","early",100,10,100,50,FALSE,TRUE,0,"GNN","Sorafenib","numerical","pearson_corr",0.486132508255639,"rna,mutation
+GNN"
